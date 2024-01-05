@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Reservation } from 'src/common/db/entities';
+import { Reservation } from 'src/database/entities';
 import { GetReservationDto } from 'src/reservation/dto/get-reservation.dto';
 import { ReservationRepository } from 'src/reservation/reservation.repository';
 

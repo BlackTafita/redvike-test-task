@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Amenity } from './amenity.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Reservation {
@@ -7,6 +8,9 @@ export class Reservation {
 
   @Column({ name: 'amenity_id' })
   amenityId: number;
+
+  @ManyToOne(() => Amenity, (amenity) => amenity.reservations)
+  amenity: Amenity;
 
   @Column({ name: 'user_id' })
   userId: number;
@@ -17,6 +21,6 @@ export class Reservation {
   @Column({ name: 'end_time' })
   endTime: number;
 
-  @Column()
-  date: number;
+  @Column({ type: 'timestamp' })
+  date: Date;
 }
