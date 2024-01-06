@@ -1,24 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { Reservation } from 'src/database/entities';
 import { GetReservationDto } from 'src/reservation/dto/get-reservation.dto';
 import { ReservationRepository } from 'src/reservation/reservation.repository';
+import { GetReservationResponseDto } from './response/get-reservation.response.dto';
 
 @Injectable()
 export class ReservationService {
   constructor(private reservationRepository: ReservationRepository) {}
 
-  async getReservations(query: GetReservationDto): Promise<Reservation[]> {
+  async getReservationsByAmenityId(
+    query: GetReservationDto,
+  ): Promise<GetReservationResponseDto[]> {
     console.log(query);
     const res = await this.reservationRepository
-      .createQueryBuilder()
-      .where('amenity_id = :amenityId', { amenityId: Number(query.amenityId) })
+      .createQueryBuilder('r')
+      .where('"amenityId" = :amenityId', { amenityId: Number(query.amenityId) })
       .andWhere('date = :date', {
-        date: BigInt(query.timestamp),
+        date: new Date(Number(query.timestamp)),
       })
-      .orderBy('start_time')
+      .innerJoinAndSelect('r.amenity', 'a')
+      .orderBy('"startTime"')
       .getMany();
 
-    console.log(res);
-    return res;
+    return res.map((el) => new GetReservationResponseDto(el));
   }
 }
