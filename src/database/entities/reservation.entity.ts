@@ -1,26 +1,23 @@
 import { Amenity } from './amenity.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Reservation {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
-
-  @Column({ name: 'amenity_id' })
-  amenityId: number;
 
   @ManyToOne(() => Amenity, (amenity) => amenity.reservations)
   amenity: Amenity;
 
-  @Column({ name: 'user_id' })
+  @Column({ nullable: false })
   userId: number;
 
-  @Column({ name: 'start_time' })
+  @Column({ nullable: false })
   startTime: number;
 
-  @Column({ name: 'end_time' })
+  @Column({ nullable: false })
   endTime: number;
 
-  @Column({ type: 'timestamp' })
+  @Column({ nullable: false })
   date: Date;
 }

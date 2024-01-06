@@ -39,7 +39,9 @@ export class InitSeed implements ISeeder {
       .values(
         reservationParsedRows.map((el) => ({
           id: Number(el.id),
-          amenityId: Number(el.amenity_id),
+          amenity: {
+            id: Number(el.amenity_id),
+          },
           userId: Number(el.user_id),
           startTime: Number(el.start_time),
           endTime: Number(el.end_time),
