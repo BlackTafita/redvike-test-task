@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReservationModule } from 'src/reservation/reservation.module';
+import { CsvToJsonModule } from './csv-to-json/csv-to-json.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ReservationModule } from 'src/reservation/reservation.module';
       autoLoadEntities: true,
     }),
     ReservationModule,
+    CsvToJsonModule,
   ],
 })
 export class AppModule {}
