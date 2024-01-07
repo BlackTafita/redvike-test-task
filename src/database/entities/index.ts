@@ -1,2 +1,3 @@
-export * from 'src/database/entities/amenity.entity';
-export * from 'src/database/entities/reservation.entity';
+export * from './amenity.entity';
+export * from './reservation.entity';
+export * from './user.entity';
